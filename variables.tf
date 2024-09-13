@@ -60,3 +60,13 @@ variable "public_subnets" {
   description = "List of Private Subnets"
   default     = ["10.0.3.0/24", "10.0.4.0/24"]
 }
+
+variable "iam_policy_name" {
+  type = string
+  default = "instanceiamrolename"
+}
+
+variable "ec2_profile_name" {
+  type = string
+  default = "instanceprofiletest"
+}

@@ -24,6 +24,8 @@ module "launch_template" {
   name              = var.launch_template-name
   security_group_id = module.security-group.security_group__id
   instance_type     = var.instance_type
+  ec2_profile_name = var.ec2_profile_name
+  ec2_iam_role = module.iam.iam_role_arn
 }
 
 module "aws_autoscaling_group" {
@@ -46,5 +48,11 @@ module "lb" {
   public_subnets = module.vpc.public_subnet_ids
   security_group_id = module.security-group.security_group__id_lb
   target_group_arn  = module.target-group.target_group_arn
+}
+
+
+module "iam" {
+ source            = "./modules/iam"
+ iam_policy_name = var.iam_policy_name
 }
 

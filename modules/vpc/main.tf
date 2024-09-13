@@ -32,7 +32,7 @@ resource "aws_subnet" "public_subnets" {
   availability_zone = var.availability_zones[count.index]
   map_public_ip_on_launch = true
   tags = {
-    Name = "private-subnet-${count.index + 1}"
+    Name = "public-subnet-${count.index + 1}"
   }
 }
 

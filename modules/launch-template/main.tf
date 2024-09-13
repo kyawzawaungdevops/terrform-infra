@@ -2,11 +2,19 @@ locals {
   lt-name = "${var.env}-${var.name}"
 }
 
+resource "aws_iam_instance_profile" "this" {
+name = var.ec2_profile_name
+role = var.ec2_iam_role
+}
+
 # Launch Template Resource
 resource "aws_launch_template" "app_server" {
   name = local.lt-name
   image_id = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
+  iam_instance_profile {
+  name = aws_iam_instance_profile.this.name
+  }
   user_data = base64encode(<<-EOF
               #!/bin/bash
               sudo apt-get update
